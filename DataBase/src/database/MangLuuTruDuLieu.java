@@ -10,10 +10,18 @@ import java.util.ArrayList;
  * @author ACER
  */
 public class MangLuuTruDuLieu {
-    ArrayList <MayTinh_DB> mang =new ArrayList<>();
-    public void them(MayTinh_DB a)
+    ArrayList <LuuTruDuLieu> mang =new ArrayList<>();
+    public void them(LuuTruDuLieu a)
     {
         mang.add(a);
+    }
+
+    public ArrayList<LuuTruDuLieu> getMang() {
+        return mang;
+    }
+
+    public void setMang(ArrayList<LuuTruDuLieu> mang) {
+        this.mang = mang;
     }
     public MayTinh_DB timkiem(MayTinh_DB a)
     {

@@ -4,6 +4,9 @@
  */
 package gui;
 import database.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  *
  * @author ACER
@@ -15,6 +18,7 @@ public class UICaSio extends javax.swing.JFrame {
      */
     XuLyDuLieu dauvao = new XuLyDuLieu();
     String temp="";
+    MangLuuTruDuLieu LichSu =new MangLuuTruDuLieu();
     public UICaSio() {
         initComponents();
     }
@@ -53,6 +57,8 @@ public class UICaSio extends javax.swing.JFrame {
         Btn_Chia = new javax.swing.JButton();
         Btn_AC = new javax.swing.JButton();
         Btn_DEL = new javax.swing.JButton();
+        Btn_His = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
 
         jButton1.setText("jButton1");
 
@@ -242,6 +248,14 @@ public class UICaSio extends javax.swing.JFrame {
             }
         });
 
+        Btn_His.setText("His");
+        Btn_His.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_HisActionPerformed(evt);
+            }
+        });
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,7 +269,9 @@ public class UICaSio extends javax.swing.JFrame {
                         .addComponent(Btn_AC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_DEL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Btn_His)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -266,11 +282,12 @@ public class UICaSio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(Btn_AC)
-                    .addComponent(Btn_DEL))
+                    .addComponent(Btn_DEL)
+                    .addComponent(Btn_His))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -308,11 +325,18 @@ public class UICaSio extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_2ActionPerformed
 
     private void Btn_DauBangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_DauBangActionPerformed
+       LuuTruDuLieu tamthoi=new LuuTruDuLieu();
        temp=temp.trim().replaceAll("\\s+", " ");
        String[] mang =temp.split(" ");
        for(String it :mang)
            dauvao.themDuLieu(it);
+       long startTime = System.currentTimeMillis();// Lấy thời gian bắt đầu
        dauvao.xulytaoketqua();
+       long endTime = System.currentTimeMillis(); // Lấy thời gian kết thúc
+       double elapsedTime = (endTime - startTime) / 1000.0; // Chuyển thành giây
+       tamthoi.setThoigianthuchien(elapsedTime);
+       tamthoi.setDuLieuPhepTinh(dauvao.HienThiDuLieu());
+       LichSu.them(tamthoi);
        txt_Display.setText(dauvao.HienThiDuLieu());
        System.out.println(dauvao.HienThiDuLieu());
        temp="";
@@ -335,6 +359,20 @@ public class UICaSio extends javax.swing.JFrame {
         txt_Display.setText(temp);
        }
     }//GEN-LAST:event_Btn_DELActionPerformed
+
+    private void Btn_HisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_HisActionPerformed
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter("His.txt"))) {
+            for (LuuTruDuLieu it :LichSu.getMang()) {
+                writer.write(it.tostring());
+                writer.newLine(); // Xuống dòng sau mỗi phần tử
+            }
+            System.out.println("Ghi ArrayList vào file thành công!");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+        }
+       History ls =new History();
+       ls.setVisible(true);
+    }//GEN-LAST:event_Btn_HisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,11 +426,13 @@ public class UICaSio extends javax.swing.JFrame {
     private javax.swing.JButton Btn_Cong;
     private javax.swing.JButton Btn_DEL;
     private javax.swing.JButton Btn_DauBang;
+    private javax.swing.JButton Btn_His;
     private javax.swing.JButton Btn_Nhan;
     private javax.swing.JButton Btn_Tru;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

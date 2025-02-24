@@ -9,5 +9,18 @@ package database;
  * @author ACER
  */
 public class MayTinh_DB {
+    String DuLieuPhepTinh;
+    public MayTinh_DB (){DuLieuPhepTinh="";}
+    public MayTinh_DB(String DuLieuPhepTinh) {
+        this.DuLieuPhepTinh = DuLieuPhepTinh;
+    }
+
+    public String getDuLieuPhepTinh() {
+        return DuLieuPhepTinh;
+    }
+
+    public void setDuLieuPhepTinh(String DuLieuPhepTinh) {
+        this.DuLieuPhepTinh = DuLieuPhepTinh;
+    }
     
 }

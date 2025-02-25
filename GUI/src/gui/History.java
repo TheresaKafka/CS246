@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class History extends javax.swing.JFrame {
     MangLuuTruDuLieu list =new MangLuuTruDuLieu();
     DefaultTableModel model;
+    UICaSio Mt=null;
     /**
      * Creates new form History
      */
@@ -26,7 +27,7 @@ public class History extends javax.swing.JFrame {
     }
     public void DocFile()
     {
-        
+        list.rsMang();
         try (BufferedReader reader = new BufferedReader(new FileReader("His.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -64,6 +65,8 @@ public class History extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_His = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        Btn_Refresh = new javax.swing.JButton();
+        Btn_Casio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +85,20 @@ public class History extends javax.swing.JFrame {
 
         jLabel1.setText("History");
 
+        Btn_Refresh.setText("Refresh");
+        Btn_Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_RefreshActionPerformed(evt);
+            }
+        });
+
+        Btn_Casio.setText("Casio");
+        Btn_Casio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_CasioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,21 +106,41 @@ public class History extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Btn_Refresh)
+                        .addGap(18, 18, 18)
+                        .addComponent(Btn_Casio)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(Btn_Casio))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_RefreshActionPerformed
+        ViewTable();
+    }//GEN-LAST:event_Btn_RefreshActionPerformed
+
+    private void Btn_CasioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CasioActionPerformed
+       if(Mt==null||!Mt.isVisible())
+        {
+            Mt=new UICaSio();
+            Mt.setVisible(true);
+        }else {Mt.toFront();}
+    }//GEN-LAST:event_Btn_CasioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +178,8 @@ public class History extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Casio;
+    private javax.swing.JButton Btn_Refresh;
     private javax.swing.JTable Tbl_His;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

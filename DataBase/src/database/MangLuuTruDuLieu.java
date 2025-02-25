@@ -31,4 +31,8 @@ public class MangLuuTruDuLieu {
                    temp =it;
         return temp;
     }
+    public void rsMang()
+    {
+        mang.clear();
+    }
 }

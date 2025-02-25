@@ -7,6 +7,8 @@ import database.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.MessageFormat;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ACER
@@ -19,6 +21,7 @@ public class UICaSio extends javax.swing.JFrame {
     XuLyDuLieu dauvao = new XuLyDuLieu();
     String temp="";
     MangLuuTruDuLieu LichSu =new MangLuuTruDuLieu();
+    History ls =null;
     public UICaSio() {
         initComponents();
     }
@@ -35,6 +38,7 @@ public class UICaSio extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txt_Display = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -42,23 +46,26 @@ public class UICaSio extends javax.swing.JFrame {
         Btn_1 = new javax.swing.JButton();
         Btn_2 = new javax.swing.JButton();
         Btn_3 = new javax.swing.JButton();
-        Btn_Cong = new javax.swing.JButton();
+        Btn_AC = new javax.swing.JButton();
+        Btn_DEL = new javax.swing.JButton();
         Btn_4 = new javax.swing.JButton();
         Btn_5 = new javax.swing.JButton();
         Btn_6 = new javax.swing.JButton();
+        Btn_Cong = new javax.swing.JButton();
         Btn_Tru = new javax.swing.JButton();
         Btn_7 = new javax.swing.JButton();
         Btn_8 = new javax.swing.JButton();
         Btn_9 = new javax.swing.JButton();
         Btn_Nhan = new javax.swing.JButton();
+        Btn_Chia = new javax.swing.JButton();
         Btn_0 = new javax.swing.JButton();
         BtnPoint = new javax.swing.JButton();
         Btn_DauBang = new javax.swing.JButton();
-        Btn_Chia = new javax.swing.JButton();
-        Btn_AC = new javax.swing.JButton();
-        Btn_DEL = new javax.swing.JButton();
+        Btn_Negative = new javax.swing.JButton();
         Btn_His = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         jButton1.setText("jButton1");
 
@@ -72,6 +79,17 @@ public class UICaSio extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
@@ -130,13 +148,21 @@ public class UICaSio extends javax.swing.JFrame {
         });
         jPanel2.add(Btn_3);
 
-        Btn_Cong.setText("+");
-        Btn_Cong.addActionListener(new java.awt.event.ActionListener() {
+        Btn_AC.setText("AC");
+        Btn_AC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_CongActionPerformed(evt);
+                Btn_ACActionPerformed(evt);
             }
         });
-        jPanel2.add(Btn_Cong);
+        jPanel2.add(Btn_AC);
+
+        Btn_DEL.setText("DEL");
+        Btn_DEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_DELActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Btn_DEL);
 
         Btn_4.setText("4");
         Btn_4.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +187,14 @@ public class UICaSio extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Btn_6);
+
+        Btn_Cong.setText("+");
+        Btn_Cong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_CongActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Btn_Cong);
 
         Btn_Tru.setText("-");
         Btn_Tru.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +236,14 @@ public class UICaSio extends javax.swing.JFrame {
         });
         jPanel2.add(Btn_Nhan);
 
+        Btn_Chia.setText("/");
+        Btn_Chia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_CongActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Btn_Chia);
+
         Btn_0.setText("0");
         Btn_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,27 +268,13 @@ public class UICaSio extends javax.swing.JFrame {
         });
         jPanel2.add(Btn_DauBang);
 
-        Btn_Chia.setText("/");
-        Btn_Chia.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Negative.setText("+/-");
+        Btn_Negative.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_CongActionPerformed(evt);
+                Btn_NegativeActionPerformed(evt);
             }
         });
-        jPanel2.add(Btn_Chia);
-
-        Btn_AC.setText("AC");
-        Btn_AC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_ACActionPerformed(evt);
-            }
-        });
-
-        Btn_DEL.setText("DEL");
-        Btn_DEL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_DELActionPerformed(evt);
-            }
-        });
+        jPanel2.add(Btn_Negative);
 
         Btn_His.setText("His");
         Btn_His.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +282,14 @@ public class UICaSio extends javax.swing.JFrame {
                 Btn_HisActionPerformed(evt);
             }
         });
+        jPanel2.add(Btn_His);
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,15 +299,10 @@ public class UICaSio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Btn_AC)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_DEL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_His)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -279,15 +310,11 @@ public class UICaSio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Btn_AC)
-                    .addComponent(Btn_DEL)
-                    .addComponent(Btn_His))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -354,8 +381,16 @@ public class UICaSio extends javax.swing.JFrame {
        {
        if(temp.substring(temp.length()-1).equals(" "))
           temp = temp.substring(0, temp.length() - 3);
-       else 
-          temp = temp.substring(0, temp.length() - 1);
+       else
+       {
+          String[] tamthoi=temp.trim().split(" ");
+          if(tamthoi.length>0)
+          {
+          String del = tamthoi[tamthoi.length-1];
+          int dai = del.length();
+          temp = temp.substring(0, temp.length() - dai);
+          }
+       }
         txt_Display.setText(temp);
        }
     }//GEN-LAST:event_Btn_DELActionPerformed
@@ -370,9 +405,26 @@ public class UICaSio extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }
-       History ls =new History();
-       ls.setVisible(true);
+        if(ls==null||!ls.isVisible())
+        {
+            ls=new History();
+            ls.setVisible(true);
+        }else {ls.toFront();ls.ViewTable();}
     }//GEN-LAST:event_Btn_HisActionPerformed
+
+    private void Btn_NegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_NegativeActionPerformed
+        if(!temp.equals(""))
+        {
+          String[] tamthoi=temp.trim().split(" ");
+          if(tamthoi.length>0)
+          {
+              double chose =Double.parseDouble(tamthoi[tamthoi.length -1]);
+              tamthoi[tamthoi.length -1]=String.valueOf(-chose);
+              temp=String.join(" ", tamthoi);
+          }
+          txt_Display.setText(temp);
+        }
+    }//GEN-LAST:event_Btn_NegativeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,15 +479,19 @@ public class UICaSio extends javax.swing.JFrame {
     private javax.swing.JButton Btn_DEL;
     private javax.swing.JButton Btn_DauBang;
     private javax.swing.JButton Btn_His;
+    private javax.swing.JButton Btn_Negative;
     private javax.swing.JButton Btn_Nhan;
     private javax.swing.JButton Btn_Tru;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField txt_Display;
     // End of variables declaration//GEN-END:variables
 }

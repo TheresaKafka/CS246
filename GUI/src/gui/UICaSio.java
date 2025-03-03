@@ -22,6 +22,8 @@ public class UICaSio extends javax.swing.JFrame {
     String temp="";
     MangLuuTruDuLieu LichSu =new MangLuuTruDuLieu();
     History ls =null;
+    FrmPhuongTrinh Pt=null;
+    FrmDayTangDan Dtd=null;
     public UICaSio() {
         initComponents();
     }
@@ -65,7 +67,9 @@ public class UICaSio extends javax.swing.JFrame {
         Btn_His = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jPt = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMnDay = new javax.swing.JMenuItem();
 
         jButton1.setText("jButton1");
 
@@ -97,6 +101,7 @@ public class UICaSio extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txt_Display.setEditable(false);
         txt_Display.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_Display.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
@@ -284,10 +289,30 @@ public class UICaSio extends javax.swing.JFrame {
         });
         jPanel2.add(Btn_His);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Tìm x");
+
+        jPt.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jPt.setText("Tìm phương trình");
+        jPt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPtActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jPt);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Mở rộng");
+
+        jMnDay.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMnDay.setText("Tính dãy số quy luật");
+        jMnDay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnDayActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMnDay);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -405,7 +430,7 @@ public class UICaSio extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }
-        if(ls==null||!ls.isVisible())
+        if(ls==null)
         {
             ls=new History();
             ls.setVisible(true);
@@ -425,6 +450,22 @@ public class UICaSio extends javax.swing.JFrame {
           txt_Display.setText(temp);
         }
     }//GEN-LAST:event_Btn_NegativeActionPerformed
+
+    private void jPtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPtActionPerformed
+        if(Pt==null)
+        {
+            Pt=new FrmPhuongTrinh();
+            Pt.setVisible(true);
+        }else {Pt.toFront();}
+    }//GEN-LAST:event_jPtActionPerformed
+
+    private void jMnDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnDayActionPerformed
+        if(Dtd==null)
+        {
+            Dtd=new FrmDayTangDan();
+            Dtd.setVisible(true);
+        }else {Pt.toFront();}
+    }//GEN-LAST:event_jMnDayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -488,10 +529,12 @@ public class UICaSio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMnDay;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JMenuItem jPt;
     private javax.swing.JTextField txt_Display;
     // End of variables declaration//GEN-END:variables
 }

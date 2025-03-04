@@ -8,6 +8,7 @@ import database.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,6 +40,7 @@ public class History extends javax.swing.JFrame {
             }
         } catch (IOException e) {
             System.out.println("Lỗi khi đọc file: " + e.getMessage());
+            JOptionPane.showMessageDialog(this,"Nhập sai kiểu dữ liệu",e.getMessage(),JOptionPane.PLAIN_MESSAGE);
         }
     }
     public void ViewTable()

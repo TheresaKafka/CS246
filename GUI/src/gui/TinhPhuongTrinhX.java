@@ -80,7 +80,7 @@ public class TinhPhuongTrinhX {
             double x1 = (-b + Math.sqrt(delta)) / (2 * a);
             double x2 = (-b - Math.sqrt(delta)) / (2 * a);  
             kq =("x1 = " + x1)
-            +("x2 = " + x2);
+            +(";x2 = " + x2);
         } else if (delta == 0) {
             // Nghiệm kép
             double x = -b / (2 * a);
@@ -91,7 +91,7 @@ public class TinhPhuongTrinhX {
             double imaginaryPart = Math.sqrt(-delta) / (2 * a);
             
             kq=("x1 = " + realPart + " + " + imaginaryPart + "i")
-            +("x2 = " + realPart + " - " + imaginaryPart + "i");
+            +(";x2 = " + realPart + " - " + imaginaryPart + "i");
         }
         }else if (choice==0){
          if (a == 0) {

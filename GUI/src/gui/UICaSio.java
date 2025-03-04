@@ -18,6 +18,7 @@ public class UICaSio extends javax.swing.JFrame {
     /**
      * Creates new form UICaSio
      */
+    public static UICaSio instance;
     XuLyDuLieu dauvao = new XuLyDuLieu();
     String temp="";
     MangLuuTruDuLieu LichSu =new MangLuuTruDuLieu();
@@ -25,6 +26,7 @@ public class UICaSio extends javax.swing.JFrame {
     FrmPhuongTrinh Pt=null;
     FrmDayTangDan Dtd=null;
     public UICaSio() {
+        instance=this;
         initComponents();
     }
 
@@ -70,6 +72,7 @@ public class UICaSio extends javax.swing.JFrame {
         jPt = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMnDay = new javax.swing.JMenuItem();
+        jMnCD = new javax.swing.JMenuItem();
 
         jButton1.setText("jButton1");
 
@@ -313,6 +316,10 @@ public class UICaSio extends javax.swing.JFrame {
         });
         jMenu2.add(jMnDay);
 
+        jMnCD.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMnCD.setText("Chuyển đổi");
+        jMenu2.add(jMnCD);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -383,7 +390,12 @@ public class UICaSio extends javax.swing.JFrame {
        for(String it :mang)
            dauvao.themDuLieu(it);
        long startTime = System.currentTimeMillis();// Lấy thời gian bắt đầu
-       dauvao.xulytaoketqua();
+        try {
+            dauvao.xulytaoketqua();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Nhập sai dữ liệu",e.getMessage(),JOptionPane.PLAIN_MESSAGE);
+        }
+       
        long endTime = System.currentTimeMillis(); // Lấy thời gian kết thúc
        double elapsedTime = (endTime - startTime) / 1000.0; // Chuyển thành giây
        tamthoi.setThoigianthuchien(elapsedTime);
@@ -391,6 +403,16 @@ public class UICaSio extends javax.swing.JFrame {
        LichSu.them(tamthoi);
        txt_Display.setText(dauvao.HienThiDuLieu());
        System.out.println(dauvao.HienThiDuLieu());
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter("His.txt"))) {
+            for (LuuTruDuLieu it :LichSu.getMang()) {
+                writer.write(it.tostring());
+                writer.newLine(); // Xuống dòng sau mỗi phần tử
+            }
+            System.out.println("Ghi ArrayList vào file thành công!");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+            JOptionPane.showMessageDialog(this,"Nhập sai kiểu dữ liệu",e.getMessage(),JOptionPane.PLAIN_MESSAGE);
+        }
        temp="";
        dauvao.rsDuLieu();
     }//GEN-LAST:event_Btn_DauBangActionPerformed
@@ -421,16 +443,8 @@ public class UICaSio extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_DELActionPerformed
 
     private void Btn_HisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_HisActionPerformed
-       try (BufferedWriter writer = new BufferedWriter(new FileWriter("His.txt"))) {
-            for (LuuTruDuLieu it :LichSu.getMang()) {
-                writer.write(it.tostring());
-                writer.newLine(); // Xuống dòng sau mỗi phần tử
-            }
-            System.out.println("Ghi ArrayList vào file thành công!");
-        } catch (IOException e) {
-            System.out.println("Lỗi khi ghi file: " + e.getMessage());
-        }
-        if(ls==null)
+
+        if(ls==null||ls.isActive())
         {
             ls=new History();
             ls.setVisible(true);
@@ -529,6 +543,7 @@ public class UICaSio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMnCD;
     private javax.swing.JMenuItem jMnDay;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

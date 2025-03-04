@@ -16,12 +16,8 @@ public class GUI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        XuLyDuLieu a =new XuLyDuLieu();
-        a.themDuLieu("50");
-        a.themDuLieu("*");
-        a.themDuLieu("2");
-        a.xulytaoketqua();
-        System.out.println(a.HienThiDuLieu());
+        UICaSio UI=new UICaSio();
+        UI.setVisible(true);
     }
     
 }

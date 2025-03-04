@@ -83,7 +83,7 @@ public class FrmPhuongTrinh extends javax.swing.JFrame {
         Lbx2.setText("bx²=");
         Lbx2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        Lbx0.setText("dx   =");
+        Lbx0.setText("d   =");
 
         Lbx1.setText("cx   =");
 

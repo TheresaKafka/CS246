@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+
+<project name="EmployeeManagement" default="build" basedir=".">
+    <!-- Properties -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="main.class" value="Employee"/>
+
+    <!-- Clean build and dist directories -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Initialize directory structure -->
+    <target name="init" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile source files -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" encoding="UTF-8"/>
+    </target>
+
+    <!-- Build the JAR file -->
+    <target name="build" depends="compile">
+        <jar destfile="${dist.dir}/EmployeeManagement.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Run the application -->
+    <target name="run" depends="build">
+        <java jar="${dist.dir}/EmployeeManagement.jar" fork="true"/>
+    </target>
+
+    <!-- Clean and rebuild -->
+    <target name="clean-build" depends="clean,build"/>
+</project>
+

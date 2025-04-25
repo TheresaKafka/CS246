@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+ <project name="EmployeeManagement" default="build" basedir=".">
+      <property name="src.dir" value="src"/>
+      <property name="build.dir" value="build"/>
+      <property name="dist.dir" value="dist"/>
+
+
+      <target name="clean">
+          <delete dir="${build.dir}"/>
+          <delete dir="${dist.dir}"/>
+      </target>
+
+
+      <target name="init" depends="clean">
+          <mkdir dir="${build.dir}"/>
+          <mkdir dir="${dist.dir}"/>
+      </target>
+
+
+      <target name="compile" depends="init">
+          <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+      </target>
+
+
+      <target name="build" depends="compile">
+          <jar destfile="${dist.dir}/EmployeeManagement.jar" basedir="${build.dir}">
+              <manifest>
+                  <attribute name="Main-Class" value="Employee"/>
+              </manifest>
+          </jar>
+      </target>
+  </project>
+
